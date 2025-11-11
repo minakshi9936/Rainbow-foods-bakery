@@ -15,7 +15,7 @@ const Hero = () => {
       id="home"
       className="relative min-h-screen flex items-center justify-center pt-16 md:pt-20"
       style={{
-        backgroundImage: 'url(https://images.pexels.com/photos/1775043/pexels-photo-1775043.jpeg?auto=compress&cs=tinysrgb&w=1920)',
+        backgroundImage: 'url(https://res.cloudinary.com/dh9uxczld/image/upload/v1762858549/rainbow-hero_tooulw.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
