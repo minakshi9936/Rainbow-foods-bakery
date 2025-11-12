@@ -1,0 +1,189 @@
+export interface Product {
+  id: number;
+  name: string;
+  slug: string;
+  category: string;
+  description: string;
+  price: number;
+  image: string;
+}
+
+export const products: Product[] = [
+  /* ========== EXOTIC CAKES ========== */
+  {
+    id: 1,
+    name: "Oreo Vanilla Cake",
+    slug: "oreo-vanilla-cake",
+    category: "Exotic Cake",
+    description: "Creamy vanilla frosting topped with Oreo biscuits.",
+    price: 949,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/oreo-vanilla-cake_mbun89.jpg",
+  },
+  {
+    id: 2,
+    name: "Chocolate Ecstasy Cake",
+    slug: "chocolate-ecstasy-cake",
+    category: "Exotic Cake",
+    description: "Decadent chocolate cake with rich frosting.",
+    price: 949,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/Chocolate_Ecstasy_Cake_hsyqan.jpg",
+  },
+  {
+    id: 3,
+    name: "Butterscotch Nuts Cake",
+    slug: "butterscotch-nuts-cake",
+    category: "Exotic Cake",
+    description: "Crunchy caramel butterscotch & nuts blend.",
+    price: 949,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/Butterscotch_Nuts_Cake_qhgonj.jpg",
+  },
+  {
+    id: 4,
+    name: "Vanilla Butterfly Cake",
+    slug: "vanilla-butterfly-cake",
+    category: "Exotic Cake",
+    description: "Soft vanilla cake with edible butterfly décor.",
+    price: 949,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/vanilla-butterfly-cake_ujcsfr.jpg",
+  },
+
+  /* ========== RICH CAKES ========== */
+  {
+    id: 5,
+    name: "Black Forest Cake",
+    slug: "black-forest-cake",
+    category: "Rich Cake",
+    description: "Classic whipped cream cake with cherries.",
+    price: 849,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935563/black-forest-cake_nekqte.jpg",
+  },
+  {
+    id: 6,
+    name: "Pineapple Delight Cake",
+    slug: "pineapple-delight-cake",
+    category: "Rich Cake",
+    description: "Soft cake infused with pineapple flavor.",
+    price: 849,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935563/pineapple-delight-cake_c7kmag.jpg",
+  },
+  {
+    id: 7,
+    name: "White Forest Cake",
+    slug: "white-forest-cake",
+    category: "Rich Cake",
+    description: "White chocolate frosting and cherry topping.",
+    price: 849,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/white-forest-cake_qmqfnk.jpg",
+  },
+  {
+    id: 8,
+    name: "White Choco Chips Cake",
+    slug: "white-choco-chips-cake",
+    category: "Rich Cake",
+    description: "Vanilla delight with white chocolate chips.",
+    price: 849,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/white-choco-chips-cake_qezdoc.jpg",
+  },
+  {
+    id: 9,
+    name: "Chocolate Choco Chips Cake",
+    slug: "chocolate-choco-chips-cake",
+    category: "Rich Cake",
+    description: "Chocolate cake topped with crunchy choco chips.",
+    price: 849,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/chocolate-choco-chips-cake_wg5ddy.jpg",
+  },
+  {
+    id: 10,
+    name: "Choco Vanilla Cake",
+    slug: "choco-vanilla-cake",
+    category: "Rich Cake",
+    description: "Delicious blend of vanilla and chocolate.",
+    price: 849,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935646/choco-vanilla-cake_ea2aof.jpg",
+  },
+
+  /* ========== PREMIUM CAKES ========== */
+  {
+    id: 11,
+    name: "KitKat Bar Cake",
+    slug: "kitkat-bar-cake",
+    category: "Premium Cake",
+    description: "Chocolate cake loaded with KitKat bars.",
+    price: 949,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/kitkat-bar-cake_h05lni.jpg",
+  },
+  {
+    id: 12,
+    name: "Fudge Brownie Cake",
+    slug: "fudge-brownie-cake",
+    category: "Premium Cake",
+    description: "Thick chocolaty cake with fudgy texture.",
+    price: 949,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/fudge-brownie-cake_dfy8qi.jpg",
+  },
+  {
+    id: 13,
+    name: "Chocolate Truffle Cake",
+    slug: "chocolate-truffle-cake",
+    category: "Premium Cake",
+    description: "Rich chocolate truffle cream layered cake.",
+    price: 949,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/chocolate-truffle-cake_pwo27c.jpg",
+  },
+  {
+    id: 14,
+    name: "Choco Butterscotch Nuts Cake",
+    slug: "choco-butterscotch-nuts-cake",
+    category: "Premium Cake",
+    description: "Chocolate fusion with crunchy butterscotch.",
+    price: 949,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/choco-butterscotch-nuts-cake_fz3ti4.jpg",
+  },
+  {
+    id: 15,
+    name: "Chocolate Walnut Cake",
+    slug: "chocolate-walnut-cake",
+    category: "Premium Cake",
+    description: "Chocolate cake infused with crunchy walnuts.",
+    price: 949,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/chocolate-walnut-cake_bpwtkp.jpg",
+  },
+  {
+    id: 16,
+    name: "Oreo Chocolate Cake",
+    slug: "oreo-chocolate-cake",
+    category: "Premium Cake",
+    description: "Chocolate cream cake topped with Oreo pieces.",
+    price: 949,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/oreo-chocolate-cake_sni3jk.jpg",
+  },
+  {
+    id: 17,
+    name: "Dark Chocolate Cake",
+    slug: "dark-chocolate-cake",
+    category: "Premium Cake",
+    description: "Intense dark chocolate layered cake.",
+    price: 949,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/dark-chocolate-cake_hkhfnr.jpg",
+  },
+  {
+    id: 18,
+    name: "Blueberry Cake",
+    slug: "blueberry-cake",
+    category: "Premium Cake",
+    description: "Fruity cake blended with blueberry essence.",
+    price: 949,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/blueberry-cake_ggebz8.jpg",
+  },
+  {
+    id: 19,
+    name: "Red Velvet Cake",
+    slug: "red-velvet-cake",
+    category: "Premium Cake",
+    description: "Classic red velvet cake with cream frosting.",
+    price: 1099,
+    image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/red-velvet-cake_ivwyy5.jpg",
+  },
+];
+
