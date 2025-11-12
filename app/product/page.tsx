@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 export default function ProductPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const categories = ["All", ...new Set(products.map((p) => p.category))];
+  const categories = ["All", ...Array.from(new Set(products.map((p) => p.category)))];
 
   const filteredProducts =
     selectedCategory === "All"

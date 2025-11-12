@@ -2,6 +2,12 @@ import { products } from "../data";
 import Image from "next/image";
 import Link from "next/link";
 
+export function generateStaticParams() {
+  return products.map((product) => ({
+    slug: product.slug,
+  }));
+}
+
 interface Params {
   params: {
     slug: string;
