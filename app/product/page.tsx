@@ -75,7 +75,9 @@ export default function ProductPage() {
           </Link>
         ))}
       </div>
+      <div className = "mt-20">
       <Footer />
+      </div>
     </main>
   );
 }
