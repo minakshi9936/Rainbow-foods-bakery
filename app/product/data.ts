@@ -4,7 +4,8 @@ export interface Product {
   slug: string;
   category: string;
   description: string;
-  price: number;
+  priceHalfKg: number;
+  pricePerKg: number;
   image: string;
 }
 
@@ -16,7 +17,8 @@ export const products: Product[] = [
     slug: "oreo-vanilla-cake",
     category: "Exotic Cake",
     description: "Creamy vanilla frosting topped with Oreo biscuits.",
-    price: 949,
+    priceHalfKg: 475,
+    pricePerKg: 950,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/oreo-vanilla-cake_mbun89.jpg",
   },
   {
@@ -25,7 +27,8 @@ export const products: Product[] = [
     slug: "chocolate-ecstasy-cake",
     category: "Exotic Cake",
     description: "Decadent chocolate cake with rich frosting.",
-    price: 949,
+    priceHalfKg: 475,
+    pricePerKg: 950,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/Chocolate_Ecstasy_Cake_hsyqan.jpg",
   },
   {
@@ -34,7 +37,8 @@ export const products: Product[] = [
     slug: "butterscotch-nuts-cake",
     category: "Exotic Cake",
     description: "Crunchy caramel butterscotch & nuts blend.",
-    price: 949,
+    priceHalfKg: 475,
+    pricePerKg: 950,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/Butterscotch_Nuts_Cake_qhgonj.jpg",
   },
   {
@@ -43,7 +47,8 @@ export const products: Product[] = [
     slug: "vanilla-butterfly-cake",
     category: "Exotic Cake",
     description: "Soft vanilla cake with edible butterfly décor.",
-    price: 949,
+    priceHalfKg: 475,
+    pricePerKg: 950,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/vanilla-butterfly-cake_ujcsfr.jpg",
   },
 
@@ -54,7 +59,8 @@ export const products: Product[] = [
     slug: "black-forest-cake",
     category: "Rich Cake",
     description: "Classic whipped cream cake with cherries.",
-    price: 849,
+    priceHalfKg: 425,
+    pricePerKg: 850,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935563/black-forest-cake_nekqte.jpg",
   },
   {
@@ -63,7 +69,8 @@ export const products: Product[] = [
     slug: "pineapple-delight-cake",
     category: "Rich Cake",
     description: "Soft cake infused with pineapple flavor.",
-    price: 849,
+    priceHalfKg: 425,
+    pricePerKg: 850,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935563/pineapple-delight-cake_c7kmag.jpg",
   },
   {
@@ -72,7 +79,8 @@ export const products: Product[] = [
     slug: "white-forest-cake",
     category: "Rich Cake",
     description: "White chocolate frosting and cherry topping.",
-    price: 849,
+    priceHalfKg: 425,
+    pricePerKg: 850,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/white-forest-cake_qmqfnk.jpg",
   },
   {
@@ -81,7 +89,8 @@ export const products: Product[] = [
     slug: "white-choco-chips-cake",
     category: "Rich Cake",
     description: "Vanilla delight with white chocolate chips.",
-    price: 849,
+    priceHalfKg: 425,
+    pricePerKg: 850,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/white-choco-chips-cake_qezdoc.jpg",
   },
   {
@@ -90,7 +99,8 @@ export const products: Product[] = [
     slug: "chocolate-choco-chips-cake",
     category: "Rich Cake",
     description: "Chocolate cake topped with crunchy choco chips.",
-    price: 849,
+    priceHalfKg: 425,
+    pricePerKg: 850,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/chocolate-choco-chips-cake_wg5ddy.jpg",
   },
   {
@@ -99,7 +109,8 @@ export const products: Product[] = [
     slug: "choco-vanilla-cake",
     category: "Rich Cake",
     description: "Delicious blend of vanilla and chocolate.",
-    price: 849,
+    priceHalfKg: 425,
+    pricePerKg: 850,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935646/choco-vanilla-cake_ea2aof.jpg",
   },
 
@@ -110,7 +121,8 @@ export const products: Product[] = [
     slug: "kitkat-bar-cake",
     category: "Premium Cake",
     description: "Chocolate cake loaded with KitKat bars.",
-    price: 949,
+    priceHalfKg: 475,
+    pricePerKg: 950,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/kitkat-bar-cake_h05lni.jpg",
   },
   {
@@ -119,7 +131,8 @@ export const products: Product[] = [
     slug: "fudge-brownie-cake",
     category: "Premium Cake",
     description: "Thick chocolaty cake with fudgy texture.",
-    price: 949,
+    priceHalfKg: 475,
+    pricePerKg: 950,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/fudge-brownie-cake_dfy8qi.jpg",
   },
   {
@@ -128,7 +141,8 @@ export const products: Product[] = [
     slug: "chocolate-truffle-cake",
     category: "Premium Cake",
     description: "Rich chocolate truffle cream layered cake.",
-    price: 949,
+    priceHalfKg: 475,
+    pricePerKg: 950,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/chocolate-truffle-cake_pwo27c.jpg",
   },
   {
@@ -137,7 +151,8 @@ export const products: Product[] = [
     slug: "choco-butterscotch-nuts-cake",
     category: "Premium Cake",
     description: "Chocolate fusion with crunchy butterscotch.",
-    price: 949,
+    priceHalfKg: 475,
+    pricePerKg: 950,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/choco-butterscotch-nuts-cake_fz3ti4.jpg",
   },
   {
@@ -146,7 +161,8 @@ export const products: Product[] = [
     slug: "chocolate-walnut-cake",
     category: "Premium Cake",
     description: "Chocolate cake infused with crunchy walnuts.",
-    price: 949,
+    priceHalfKg: 475,
+    pricePerKg: 950,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/chocolate-walnut-cake_bpwtkp.jpg",
   },
   {
@@ -155,7 +171,8 @@ export const products: Product[] = [
     slug: "oreo-chocolate-cake",
     category: "Premium Cake",
     description: "Chocolate cream cake topped with Oreo pieces.",
-    price: 949,
+    priceHalfKg: 475,
+    pricePerKg: 950,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/oreo-chocolate-cake_sni3jk.jpg",
   },
   {
@@ -164,7 +181,8 @@ export const products: Product[] = [
     slug: "dark-chocolate-cake",
     category: "Premium Cake",
     description: "Intense dark chocolate layered cake.",
-    price: 949,
+    priceHalfKg: 475,
+    pricePerKg: 950,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/dark-chocolate-cake_hkhfnr.jpg",
   },
   {
@@ -173,7 +191,8 @@ export const products: Product[] = [
     slug: "blueberry-cake",
     category: "Premium Cake",
     description: "Fruity cake blended with blueberry essence.",
-    price: 949,
+    priceHalfKg: 475,
+    pricePerKg: 950,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/blueberry-cake_ggebz8.jpg",
   },
   {
@@ -182,7 +201,8 @@ export const products: Product[] = [
     slug: "red-velvet-cake",
     category: "Premium Cake",
     description: "Classic red velvet cake with cream frosting.",
-    price: 1099,
+    priceHalfKg: 550,
+    pricePerKg: 1100,
     image: "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/red-velvet-cake_ivwyy5.jpg",
   },
 ];

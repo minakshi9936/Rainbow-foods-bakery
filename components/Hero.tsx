@@ -90,14 +90,14 @@ const Hero = () => {
               alt="Menu"
               className="w-full rounded-md object-contain"
               onError={(e) => {
-                (e.target as HTMLImageElement).src = '/menu.jpg';
+                (e.target as HTMLImageElement).src = '/menu1.jpg';
               }}
             />
 
             {/* Download Button */}
             <div className="text-center mt-4">
               <a
-                href="/menu.jpg"
+                href="/menu1.jpg"
                 download
                 className="inline-flex items-center gap-2 px-6 py-3 bg-orange-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition"
               >

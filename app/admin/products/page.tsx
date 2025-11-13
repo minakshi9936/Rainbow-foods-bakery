@@ -10,8 +10,11 @@ import { LogOut, ArrowLeft, Plus, Trash2, Edit, AlertCircle, Check } from 'lucid
 interface Product {
   id: string;
   title: string;
-  price: string;
+  priceHalfKg: string;
+  pricePerKg: string;
   image: string;
+  category: string;
+  description: string;
 }
 
 export default function AdminProducts() {
@@ -25,15 +28,35 @@ export default function AdminProducts() {
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
-    price: '',
+    priceHalfKg: '',
+    pricePerKg: '',
     image: '',
+    category: '',
+    description: '',
   });
 
   useEffect(() => {
     const savedProducts = localStorage.getItem('products');
     if (savedProducts) {
       try {
-        setProducts(JSON.parse(savedProducts));
+        const parsed = JSON.parse(savedProducts) as Product[];
+        const normalized = parsed.map((product) => {
+          const pricePerKg = product.pricePerKg ?? '';
+          const parsedPerKg = Number(pricePerKg);
+          const hasHalf = product.priceHalfKg && product.priceHalfKg.trim() !== '';
+          const priceHalfKg = hasHalf
+            ? product.priceHalfKg
+            : Number.isNaN(parsedPerKg)
+            ? ''
+            : Math.round(parsedPerKg / 2).toString();
+          return {
+            ...product,
+            pricePerKg,
+            priceHalfKg,
+          };
+        });
+        setProducts(normalized);
+        localStorage.setItem('products', JSON.stringify(normalized));
       } catch (err) {
         console.error('Error loading products:', err);
       }
@@ -41,27 +64,39 @@ export default function AdminProducts() {
       const defaultProducts: Product[] = [
         {
           id: '1',
-          image: 'https://images.pexels.com/photos/1775043/pexels-photo-1775043.jpeg?auto=compress&cs=tinysrgb&w=600',
-          title: 'Artisan Sourdough Bread',
-          price: '$6.99',
+          image: 'https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/oreo-vanilla-cake_mbun89.jpg',
+          title: 'Oreo Vanilla Cake',
+          priceHalfKg: '475',
+          pricePerKg: '950',
+          category: 'Exotic Cake',
+          description: 'Creamy vanilla frosting topped with Oreo biscuits.',
         },
         {
           id: '2',
-          image: 'https://images.pexels.com/photos/2067396/pexels-photo-2067396.jpeg?auto=compress&cs=tinysrgb&w=600',
-          title: 'Chocolate Croissants',
-          price: '$4.50',
+          image: 'https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/Chocolate_Ecstasy_Cake_hsyqan.jpg',
+          title: 'Chocolate Ecstasy Cake',
+          priceHalfKg: '475',
+          pricePerKg: '950',
+          category: 'Exotic Cake',
+          description: 'Decadent chocolate cake with rich frosting.',
         },
         {
           id: '3',
-          image: 'https://images.pexels.com/photos/1854652/pexels-photo-1854652.jpeg?auto=compress&cs=tinysrgb&w=600',
-          title: 'Blueberry Muffins',
-          price: '$3.25',
+          image: 'https://res.cloudinary.com/dh9uxczld/image/upload/v1762935563/black-forest-cake_nekqte.jpg',
+          title: 'Black Forest Cake',
+          priceHalfKg: '425',
+          pricePerKg: '850',
+          category: 'Rich Cake',
+          description: 'Classic whipped cream cake with cherries.',
         },
         {
           id: '4',
-          image: 'https://images.pexels.com/photos/1721934/pexels-photo-1721934.jpeg?auto=compress&cs=tinysrgb&w=600',
-          title: 'Cinnamon Rolls',
-          price: '$4.75',
+          image: 'https://res.cloudinary.com/dh9uxczld/image/upload/v1762935561/red-velvet-cake_ivwyy5.jpg',
+          title: 'Red Velvet Cake',
+          priceHalfKg: '550',
+          pricePerKg: '1100',
+          category: 'Premium Cake',
+          description: 'Classic red velvet cake with cream frosting.',
         },
       ];
       setProducts(defaultProducts);
@@ -80,7 +115,14 @@ export default function AdminProducts() {
     setError('');
     setSuccess('');
 
-    if (!formData.title.trim() || !formData.price.trim() || !formData.image.trim()) {
+    if (
+      !formData.title.trim() ||
+      !formData.priceHalfKg.trim() ||
+      !formData.pricePerKg.trim() ||
+      !formData.image.trim() ||
+      !formData.category.trim() ||
+      !formData.description.trim()
+    ) {
       setError('Please fill in all fields');
       return;
     }
@@ -102,7 +144,7 @@ export default function AdminProducts() {
       setSuccess('Product added successfully!');
     }
 
-    setFormData({ title: '', price: '', image: '' });
+    setFormData({ title: '', priceHalfKg: '', pricePerKg: '', image: '', category: '', description: '' });
     setShowForm(false);
     setTimeout(() => setSuccess(''), 3000);
   };
@@ -110,15 +152,18 @@ export default function AdminProducts() {
   const handleEdit = (product: Product) => {
     setFormData({
       title: product.title,
-      price: product.price,
+      priceHalfKg: product.priceHalfKg,
+      pricePerKg: product.pricePerKg,
       image: product.image,
+      category: product.category,
+      description: product.description,
     });
     setEditingId(product.id);
     setShowForm(true);
   };
 
   const handleCancel = () => {
-    setFormData({ title: '', price: '', image: '' });
+    setFormData({ title: '', priceHalfKg: '', pricePerKg: '', image: '', category: '', description: '' });
     setEditingId(null);
     setShowForm(false);
     setError('');
@@ -203,15 +248,29 @@ export default function AdminProducts() {
                 </div>
 
                 <div>
-                  <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-2">
-                    Price
+                  <label htmlFor="priceHalfKg" className="block text-sm font-medium text-gray-700 mb-2">
+                    Price for 500g (₹)
                   </label>
                   <input
-                    id="price"
-                    type="text"
-                    value={formData.price}
-                    onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                    placeholder="e.g., $6.99"
+                    id="priceHalfKg"
+                    type="number"
+                    value={formData.priceHalfKg}
+                    onChange={(e) => setFormData({ ...formData, priceHalfKg: e.target.value })}
+                    placeholder="e.g., 475"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="pricePerKg" className="block text-sm font-medium text-gray-700 mb-2">
+                    Price Per KG (₹)
+                  </label>
+                  <input
+                    id="pricePerKg"
+                    type="number"
+                    value={formData.pricePerKg}
+                    onChange={(e) => setFormData({ ...formData, pricePerKg: e.target.value })}
+                    placeholder="e.g., 950"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
                   />
                 </div>
@@ -226,6 +285,34 @@ export default function AdminProducts() {
                     value={formData.image}
                     onChange={(e) => setFormData({ ...formData, image: e.target.value })}
                     placeholder="https://example.com/image.jpg"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
+                    Category
+                  </label>
+                  <input
+                    id="category"
+                    type="text"
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    placeholder="e.g., Exotic Cake"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+                    Description
+                  </label>
+                  <textarea
+                    id="description"
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    placeholder="e.g., Creamy vanilla frosting topped with Oreo biscuits."
+                    rows={3}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
                   />
                 </div>
@@ -271,7 +358,10 @@ export default function AdminProducts() {
                   <tr className="border-b-2 border-gray-200">
                     <th className="text-left py-3 px-4 font-semibold text-gray-900">Image</th>
                     <th className="text-left py-3 px-4 font-semibold text-gray-900">Product Name</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Price</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Category</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Price 500g</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Price Per KG</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Description</th>
                     <th className="text-left py-3 px-4 font-semibold text-gray-900">Actions</th>
                   </tr>
                 </thead>
@@ -289,7 +379,10 @@ export default function AdminProducts() {
                         />
                       </td>
                       <td className="py-3 px-4 text-gray-900">{product.title}</td>
-                      <td className="py-3 px-4 text-gray-900 font-semibold">{product.price}</td>
+                      <td className="py-3 px-4 text-gray-900">{product.category}</td>
+                      <td className="py-3 px-4 text-gray-900 font-semibold">₹{product.priceHalfKg}/500g</td>
+                      <td className="py-3 px-4 text-gray-900 font-semibold">₹{product.pricePerKg}/kg</td>
+                      <td className="py-3 px-4 text-gray-900 text-sm line-clamp-2">{product.description}</td>
                       <td className="py-3 px-4">
                         <div className="flex gap-2">
                           <button

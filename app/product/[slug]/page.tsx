@@ -41,7 +41,16 @@ export default function ProductDetails({ params }: Params) {
 
           <p className="text-gray-300">{product.description}</p>
 
-          <p className="text-orange-400 text-3xl font-semibold">₹{product.price}</p>
+          <div className="space-y-2">
+            <p className="text-orange-400 text-3xl font-semibold">
+              ₹{product.pricePerKg}
+              <span className="ml-2 text-base text-gray-400">/kg</span>
+            </p>
+            <p className="text-orange-300 text-xl font-semibold">
+              ₹{product.priceHalfKg}
+              <span className="ml-2 text-sm text-gray-400">/500g</span>
+            </p>
+          </div>
 
           <Link
             href="/product"

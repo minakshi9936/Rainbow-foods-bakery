@@ -142,8 +142,10 @@ const Contact = () => {
                   <div>
                     <p className="font-medium text-white">Address</p>
                     <p className="text-gray-600">
-                      123 Citywitty office <br />
-                      Greater noida
+                      Rainbow, Multi Brand Kitchen, Pili Building, Balla ki mandhaya,
+                      opposite Mukaddam Tower, behind Yayue India Pvt Ltd, <br />
+                      Surajpur Site 4, Greater Noida, Uttar Pradesh 20131
+
                     </p>
                   </div>
                 </div>
