@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { Facebook, Instagram, Twitter } from 'lucide-react';
+import Link from 'next/link';
+import { Facebook, Instagram, Twitter, LogIn } from 'lucide-react';
 
 const Footer = () => {
   const socialLinks = [
@@ -59,10 +60,18 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 text-center">
-          <p className="text-gray-400">
-            &copy; {new Date().getFullYear()} Rainbow Foods & Bakery. All rights reserved.
-          </p>
+        <div className="border-t border-gray-800 pt-8">
+          <div className="flex justify-between items-center flex-wrap gap-4">
+            <p className="text-gray-400">
+              &copy; {new Date().getFullYear()} Rainbow Foods & Bakery. All rights reserved.
+            </p>
+            <Link href="/admin/login">
+              <button className="inline-flex items-center gap-2 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg transition-colors">
+                <LogIn className="h-4 w-4" />
+                Admin Panel
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

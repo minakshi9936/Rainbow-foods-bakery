@@ -1,10 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowRight, X, Download } from "lucide-react";
 
 const Hero = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuImageUrl, setMenuImageUrl] = useState('/menu.jpg');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const savedMenuUrl = localStorage.getItem('menuImageUrl');
+    if (savedMenuUrl) {
+      setMenuImageUrl(savedMenuUrl);
+    }
+    setMounted(true);
+  }, []);
 
   const scrollToProducts = () => {
     const element = document.querySelector("#products");
@@ -76,9 +86,12 @@ const Hero = () => {
 
             {/* Menu Image */}
             <img
-              src="/menu.jpg"
+              src={menuImageUrl}
               alt="Menu"
               className="w-full rounded-md object-contain"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = '/menu.jpg';
+              }}
             />
 
             {/* Download Button */}
