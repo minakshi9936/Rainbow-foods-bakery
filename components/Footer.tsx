@@ -7,7 +7,7 @@ import { Facebook, Instagram, Twitter, LogIn } from 'lucide-react';
 const Footer = () => {
   const socialLinks = [
     { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
+    { icon: Instagram, href: 'https://www.instagram.com/rainbowcakes49?igsh=NTJjMDR6Z3dneDcz', label: 'Instagram' },
     { icon: Twitter, href: '#', label: 'Twitter' },
   ];
 
