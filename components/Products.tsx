@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { products as productsData } from '@/app/product/data';
+import categoriesData from '../categories.json';
 import { ArrowRight } from 'lucide-react';
 
 interface AdminProduct {
@@ -68,7 +69,7 @@ const Products = () => {
     setDisplayProducts(filtered.slice(0, 4));
   }, [selectedCategory, allProducts]);
 
-  const categories = ['All', ...Array.from(new Set(allProducts.map(p => p.category)))];
+  const categories = ['All', ...categoriesData];
 
   return (
     <section id="products" className="py-16 md:py-24 bg-black">

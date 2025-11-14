@@ -4,6 +4,7 @@ import { useState, useEffect, MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { products as staticProducts } from "./data";
+import categoriesData from "../../categories.json";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -60,7 +61,7 @@ export default function ProductPage() {
     }
   }, []);
 
-  const categories = ["All", ...Array.from(new Set(products.map((p) => p.category)))];
+  const categories = ["All", ...categoriesData];
 
   const filteredProducts =
     selectedCategory === "All"
