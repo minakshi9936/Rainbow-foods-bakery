@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const galleryImages = [
   "https://res.cloudinary.com/dh9uxczld/image/upload/v1762935562/oreo-vanilla-cake_mbun89.jpg",
@@ -98,8 +99,8 @@ export default function GalleryPage() {
       )}
       <div className="mt-20">
       <Footer />
-      <div />
       </div>
+      <WhatsAppButton />
     </main>
   );
 }

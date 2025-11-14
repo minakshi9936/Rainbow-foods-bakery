@@ -7,6 +7,7 @@ import { products as staticProducts } from "./[slug]/data";
 import categoriesData from "../../categories.json";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 
 
@@ -119,6 +120,7 @@ export default function ProductPage() {
       <div className = "mt-20">
       <Footer />
       </div>
+      <WhatsAppButton />
     </main>
   );
 }
