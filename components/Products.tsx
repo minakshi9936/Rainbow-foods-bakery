@@ -93,7 +93,7 @@ const Products = () => {
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="text-lg font-bold text-white">{product.title}</h3>
+                  <h3 className="text-lg font-bold text-white line-clamp-1">{product.title}</h3>
                   <p className="text-gray-400 text-xs mt-1 line-clamp-1">{product.description}</p>
                   <div className="mt-3 flex justify-between items-center">
                     <p className="text-orange-400 text-lg font-semibold">
