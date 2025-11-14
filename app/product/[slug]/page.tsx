@@ -1,4 +1,4 @@
-import { products } from "../data";
+import { products, getProductBySlug } from "./data";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,7 +15,7 @@ interface Params {
 }
 
 export default function ProductDetails({ params }: Params) {
-  const product = products.find((p) => p.slug === params.slug);
+  const product = getProductBySlug(params.slug);
 
   if (!product) {
     return (

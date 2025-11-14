@@ -1,27 +1,19 @@
 "use client";
 
-import { useState, useEffect, MouseEvent } from "react";
+import { useState, MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { products as staticProducts } from "./data";
+import { products as staticProducts } from "./[slug]/data";
 import categoriesData from "../../categories.json";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-interface AdminProduct {
-  id: string;
-  title: string;
-  priceHalfKg: string;
-  pricePerKg: string;
-  image: string;
-  category: string;
-  description: string;
-}
+
 
 export default function ProductPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedWeight, setSelectedWeight] = useState<'500g' | '1kg'>("1kg");
-  const [products, setProducts] = useState(staticProducts);
+  const products = staticProducts;
   const whatsappNumber = "6389202030";
 
   const handleOrderClick = (event: MouseEvent<HTMLButtonElement>, productName: string) => {
@@ -33,33 +25,7 @@ export default function ProductPage() {
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   };
 
-  useEffect(() => {
-    const savedProducts = localStorage.getItem('products');
-    if (savedProducts) {
-      try {
-        const adminProducts = JSON.parse(savedProducts) as AdminProduct[];
-        const formattedProducts = adminProducts.map((p, idx) => {
-          const parsedPerKg = parseInt(p.pricePerKg, 10);
-          const parsedHalfKg = parseInt(p.priceHalfKg, 10);
-          const pricePerKg = Number.isNaN(parsedPerKg) ? 0 : parsedPerKg;
-          const priceHalfKg = Number.isNaN(parsedHalfKg) ? Math.round(pricePerKg / 2) : parsedHalfKg;
-          return {
-            id: idx + 1,
-            name: p.title,
-            slug: p.title.toLowerCase().replace(/\s+/g, '-'),
-            category: p.category,
-            description: p.description,
-            priceHalfKg,
-            pricePerKg,
-            image: p.image,
-          };
-        });
-        setProducts(formattedProducts);
-      } catch (err) {
-        console.error('Error loading admin products:', err);
-      }
-    }
-  }, []);
+
 
   const categories = ["All", ...categoriesData];
 

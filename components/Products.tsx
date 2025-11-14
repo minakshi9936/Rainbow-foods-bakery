@@ -1,23 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { products as productsData } from '@/app/product/data';
+import { products as productsData } from '@/app/product/[slug]/data';
 import categoriesData from '../categories.json';
 import { ArrowRight } from 'lucide-react';
 
-interface AdminProduct {
-  id: string;
-  title: string;
-  priceHalfKg: string;
-  pricePerKg: string;
-  image: string;
-  category: string;
-  description: string;
-}
+
 
 const Products = () => {
-  const defaultProducts = productsData.slice(0, 4).map((p) => ({
+  const allProducts = productsData.map((p) => ({
     id: p.id.toString(),
     title: p.name,
     priceHalfKg: p.priceHalfKg.toString(),
@@ -27,47 +19,12 @@ const Products = () => {
     description: p.description,
   }));
 
-  const [allProducts, setAllProducts] = useState<AdminProduct[]>(defaultProducts);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedWeight, setSelectedWeight] = useState<'500g' | '1kg'>('1kg');
-  const [displayProducts, setDisplayProducts] = useState<AdminProduct[]>(defaultProducts.slice(0, 4));
+  const displayProducts = selectedCategory === 'All'
+    ? allProducts.slice(0, 4)
+    : allProducts.filter(p => p.category === selectedCategory).slice(0, 4);
   const whatsappNumber = '6389202030';
-
-  useEffect(() => {
-    const savedProducts = localStorage.getItem('products');
-    
-    if (savedProducts) {
-      try {
-        const parsed = JSON.parse(savedProducts) as AdminProduct[];
-        const normalized = parsed.map((product) => {
-          const pricePerKg = product.pricePerKg ?? '';
-          const parsedPerKg = Number(pricePerKg);
-          const hasHalf = product.priceHalfKg && product.priceHalfKg.trim() !== '';
-          const priceHalfKg = hasHalf
-            ? product.priceHalfKg
-            : Number.isNaN(parsedPerKg)
-            ? ''
-            : Math.round(parsedPerKg / 2).toString();
-          return {
-            ...product,
-            pricePerKg,
-            priceHalfKg,
-          };
-        });
-        setAllProducts(normalized);
-      } catch (err) {
-        console.error('Error loading products:', err);
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    let filtered = allProducts;
-    if (selectedCategory !== 'All') {
-      filtered = allProducts.filter(p => p.category === selectedCategory);
-    }
-    setDisplayProducts(filtered.slice(0, 4));
-  }, [selectedCategory, allProducts]);
 
   const categories = ['All', ...categoriesData];
 
