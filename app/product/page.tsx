@@ -139,6 +139,12 @@ export default function ProductPage() {
                   {p.category}
                 </span>
               </div>
+              <button
+                onClick={(event) => handleOrderClick(event, p.name)}
+                className="mt-4 inline-flex w-full justify-center items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold rounded-lg transition-all"
+              >
+                Order Now
+              </button>
             </div>
           </Link>
         ))}

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { useAdmin } from '@/context/AdminContext';
+import WhatsAppButton from '@/components/WhatsAppButton';
 import Link from 'next/link';
 import { LogOut, ArrowLeft, Plus, Trash2, Edit, AlertCircle, Check } from 'lucide-react';
 
@@ -128,9 +129,7 @@ export default function AdminProducts() {
     }
 
     if (editingId) {
-      const updatedProducts = products.map((p) =>
-        p.id === editingId ? { ...p, ...formData } : p
-      );
+      const updatedProducts = products.map((p) => (p.id === editingId ? { ...p, ...formData } : p));
       saveProducts(updatedProducts);
       setSuccess('Product updated successfully!');
       setEditingId(null);
@@ -184,26 +183,30 @@ export default function AdminProducts() {
   };
 
   if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-black via-[#14060f] to-black text-white">
+        Loading...
+      </div>
+    );
   }
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gray-50">
-        <nav className="bg-white shadow-md">
+      <div className="min-h-screen bg-gradient-to-br from-black via-[#14060f] to-black text-white">
+        <nav className="bg-black/80 backdrop-blur-md border-b border-orange-500/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <Link href="/admin/dashboard">
-                <button className="inline-flex items-center gap-2 px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold rounded-lg transition-colors">
+                <button className="inline-flex items-center gap-2 px-4 py-2 border border-white/10 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-colors">
                   <ArrowLeft className="h-4 w-4" />
                   Back
                 </button>
               </Link>
-              <h1 className="text-2xl font-bold text-gray-900">Products Management</h1>
+              <h1 className="text-2xl font-bold text-white">Products Management</h1>
             </div>
             <button
               onClick={handleLogout}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-rose-500 via-orange-500 to-amber-500 hover:from-rose-600 hover:via-orange-600 hover:to-amber-600 text-white font-semibold rounded-lg transition-colors shadow-lg hover:shadow-orange-500/40"
             >
               <LogOut className="h-4 w-4" />
               Logout
@@ -211,30 +214,30 @@ export default function AdminProducts() {
           </div>
         </nav>
 
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-              <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-red-600">{error}</p>
+            <div className="p-4 bg-rose-500/10 border border-rose-500/40 rounded-lg flex items-start gap-3 text-rose-100">
+              <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
+              <p className="text-sm">{error}</p>
             </div>
           )}
 
           {success && (
-            <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3">
-              <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-green-600">{success}</p>
+            <div className="p-4 bg-emerald-500/10 border border-emerald-500/40 rounded-lg flex items-start gap-3 text-emerald-100">
+              <Check className="h-5 w-5 flex-shrink-0 mt-0.5" />
+              <p className="text-sm">{success}</p>
             </div>
           )}
 
           {showForm && (
-            <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            <div className="bg-white/5 border border-white/10 rounded-xl p-8">
+              <h2 className="text-2xl font-bold text-white mb-6">
                 {editingId ? 'Edit Product' : 'Add New Product'}
               </h2>
 
-              <form onSubmit={handleAddProduct} className="space-y-4">
+              <form onSubmit={handleAddProduct} className="space-y-5">
                 <div>
-                  <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="title" className="block text-sm font-medium text-slate-200 mb-2">
                     Product Name
                   </label>
                   <input
@@ -243,40 +246,42 @@ export default function AdminProducts() {
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                     placeholder="e.g., Artisan Sourdough Bread"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-2 rounded-lg border border-white/10 bg-black/60 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-orange-500 focus:border-orange-400 outline-none"
                   />
                 </div>
 
-                <div>
-                  <label htmlFor="priceHalfKg" className="block text-sm font-medium text-gray-700 mb-2">
-                    Price for 500g (₹)
-                  </label>
-                  <input
-                    id="priceHalfKg"
-                    type="number"
-                    value={formData.priceHalfKg}
-                    onChange={(e) => setFormData({ ...formData, priceHalfKg: e.target.value })}
-                    placeholder="e.g., 475"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div>
+                    <label htmlFor="priceHalfKg" className="block text-sm font-medium text-slate-200 mb-2">
+                      Price for 500g (₹)
+                    </label>
+                    <input
+                      id="priceHalfKg"
+                      type="number"
+                      value={formData.priceHalfKg}
+                      onChange={(e) => setFormData({ ...formData, priceHalfKg: e.target.value })}
+                      placeholder="e.g., 475"
+                      className="w-full px-4 py-2 rounded-lg border border-white/10 bg-black/60 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-orange-500 focus:border-orange-400 outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="pricePerKg" className="block text-sm font-medium text-slate-200 mb-2">
+                      Price Per KG (₹)
+                    </label>
+                    <input
+                      id="pricePerKg"
+                      type="number"
+                      value={formData.pricePerKg}
+                      onChange={(e) => setFormData({ ...formData, pricePerKg: e.target.value })}
+                      placeholder="e.g., 950"
+                      className="w-full px-4 py-2 rounded-lg border border-white/10 bg-black/60 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-orange-500 focus:border-orange-400 outline-none"
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <label htmlFor="pricePerKg" className="block text-sm font-medium text-gray-700 mb-2">
-                    Price Per KG (₹)
-                  </label>
-                  <input
-                    id="pricePerKg"
-                    type="number"
-                    value={formData.pricePerKg}
-                    onChange={(e) => setFormData({ ...formData, pricePerKg: e.target.value })}
-                    placeholder="e.g., 950"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="image" className="block text-sm font-medium text-slate-200 mb-2">
                     Image URL
                   </label>
                   <input
@@ -285,42 +290,44 @@ export default function AdminProducts() {
                     value={formData.image}
                     onChange={(e) => setFormData({ ...formData, image: e.target.value })}
                     placeholder="https://example.com/image.jpg"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-2 rounded-lg border border-white/10 bg-black/60 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-orange-500 focus:border-orange-400 outline-none"
                   />
                 </div>
 
-                <div>
-                  <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
-                    Category
-                  </label>
-                  <input
-                    id="category"
-                    type="text"
-                    value={formData.category}
-                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    placeholder="e.g., Exotic Cake"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div>
+                    <label htmlFor="category" className="block text-sm font-medium text-slate-200 mb-2">
+                      Category
+                    </label>
+                    <input
+                      id="category"
+                      type="text"
+                      value={formData.category}
+                      onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                      placeholder="e.g., Exotic Cake"
+                      className="w-full px-4 py-2 rounded-lg border border-white/10 bg-black/60 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-orange-500 focus:border-orange-400 outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="description" className="block text-sm font-medium text-slate-200 mb-2">
+                      Description
+                    </label>
+                    <textarea
+                      id="description"
+                      value={formData.description}
+                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                      placeholder="e.g., Creamy vanilla frosting topped with Oreo biscuits."
+                      rows={3}
+                      className="w-full px-4 py-2 rounded-lg border border-white/10 bg-black/60 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-orange-500 focus:border-orange-400 outline-none"
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
-                    Description
-                  </label>
-                  <textarea
-                    id="description"
-                    value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    placeholder="e.g., Creamy vanilla frosting topped with Oreo biscuits."
-                    rows={3}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
-                  />
-                </div>
-
-                <div className="flex gap-4">
+                <div className="flex flex-wrap gap-4">
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2 px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 hover:from-orange-600 hover:via-pink-600 hover:to-purple-600 text-white font-semibold rounded-lg transition-colors shadow-lg hover:shadow-orange-500/40"
                   >
                     <Check className="h-4 w-4" />
                     {editingId ? 'Update Product' : 'Add Product'}
@@ -328,7 +335,7 @@ export default function AdminProducts() {
                   <button
                     type="button"
                     onClick={handleCancel}
-                    className="inline-flex items-center gap-2 px-6 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold rounded-lg transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-2.5 border border-white/10 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-colors"
                   >
                     Cancel
                   </button>
@@ -338,10 +345,10 @@ export default function AdminProducts() {
           )}
 
           {!showForm && (
-            <div className="mb-8">
+            <div>
               <button
                 onClick={() => setShowForm(true)}
-                className="inline-flex items-center gap-2 px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 hover:from-orange-600 hover:via-pink-600 hover:to-purple-600 text-white font-semibold rounded-lg transition-colors shadow-lg hover:shadow-orange-500/40"
               >
                 <Plus className="h-4 w-4" />
                 Add New Product
@@ -349,52 +356,51 @@ export default function AdminProducts() {
             </div>
           )}
 
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Products ({products.length})</h2>
-
+          <div className="bg-white/5 border border-white/10 rounded-xl p-8">
+            <h2 className="text-2xl font-bold text-white mb-6">Products ({products.length})</h2>
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full text-left">
                 <thead>
-                  <tr className="border-b-2 border-gray-200">
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Image</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Product Name</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Category</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Price 500g</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Price Per KG</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Description</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Actions</th>
+                  <tr className="border-b border-white/10 text-sm uppercase text-slate-200 tracking-wide">
+                    <th className="py-3 px-4 font-semibold">Image</th>
+                    <th className="py-3 px-4 font-semibold">Product Name</th>
+                    <th className="py-3 px-4 font-semibold">Category</th>
+                    <th className="py-3 px-4 font-semibold">Price 500g</th>
+                    <th className="py-3 px-4 font-semibold">Price Per KG</th>
+                    <th className="py-3 px-4 font-semibold">Description</th>
+                    <th className="py-3 px-4 font-semibold">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {products.map((product) => (
-                    <tr key={product.id} className="border-b border-gray-200 hover:bg-gray-50">
+                    <tr key={product.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
                       <td className="py-3 px-4">
                         <img
                           src={product.image}
                           alt={product.title}
-                          className="h-12 w-12 object-cover rounded"
+                          className="h-12 w-12 object-cover rounded-md border border-white/10"
                           onError={(e) => {
                             (e.target as HTMLImageElement).src = 'https://via.placeholder.com/50?text=Error';
                           }}
                         />
                       </td>
-                      <td className="py-3 px-4 text-gray-900">{product.title}</td>
-                      <td className="py-3 px-4 text-gray-900">{product.category}</td>
-                      <td className="py-3 px-4 text-gray-900 font-semibold">₹{product.priceHalfKg}/500g</td>
-                      <td className="py-3 px-4 text-gray-900 font-semibold">₹{product.pricePerKg}/kg</td>
-                      <td className="py-3 px-4 text-gray-900 text-sm line-clamp-2">{product.description}</td>
+                      <td className="py-3 px-4 text-slate-100 font-semibold">{product.title}</td>
+                      <td className="py-3 px-4 text-slate-200">{product.category}</td>
+                      <td className="py-3 px-4 text-orange-200 font-semibold">₹{product.priceHalfKg}/500g</td>
+                      <td className="py-3 px-4 text-orange-200 font-semibold">₹{product.pricePerKg}/kg</td>
+                      <td className="py-3 px-4 text-slate-300 text-sm line-clamp-2">{product.description}</td>
                       <td className="py-3 px-4">
-                        <div className="flex gap-2">
+                        <div className="flex flex-wrap gap-2">
                           <button
                             onClick={() => handleEdit(product)}
-                            className="inline-flex items-center gap-2 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded transition-colors"
+                            className="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 hover:from-orange-600 hover:via-pink-600 hover:to-purple-600 text-white font-semibold rounded-md transition-colors"
                           >
                             <Edit className="h-4 w-4" />
                             Edit
                           </button>
                           <button
                             onClick={() => handleDeleteProduct(product.id)}
-                            className="inline-flex items-center gap-2 px-3 py-1 bg-red-600 hover:bg-red-700 text-white font-semibold rounded transition-colors"
+                            className="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white font-semibold rounded-md transition-colors"
                           >
                             <Trash2 className="h-4 w-4" />
                             Delete
@@ -406,13 +412,13 @@ export default function AdminProducts() {
                 </tbody>
               </table>
             </div>
-
             {products.length === 0 && (
-              <p className="text-center text-gray-500 py-12">No products yet. Add one using the button above.</p>
+              <p className="text-center text-slate-300 py-12">No products yet. Add one using the button above.</p>
             )}
           </div>
         </main>
       </div>
+      <WhatsAppButton />
     </ProtectedRoute>
   );
 }

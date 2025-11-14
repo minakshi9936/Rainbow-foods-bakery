@@ -13,7 +13,7 @@ const Header = () => {
     { name: "About", href: "/about" },
     { name: "Products", href: "/product" },
     { name: "Gallery", href: "/gallery" },
-    { name: "Contact", href: "#contact" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const scrollToSection = (href: string) => {

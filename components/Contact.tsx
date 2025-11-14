@@ -10,15 +10,15 @@ const Contact = () => {
     message: '',
   });
 
-  const [submitted, setSubmitted] = useState(false);
+  const whatsappNumber = '6389202030';
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', message: '' });
-    }, 3000);
+    const { name, email, message } = formData;
+    const whatsappText = `Name: ${name}\nEmail: ${email}\nMessage: ${message}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappText)}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    setFormData({ name: '', email: '', message: '' });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -36,7 +36,7 @@ const Contact = () => {
             Get in Touch
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Have questions or want to place a custom order? We'd love to hear from you
+            Have questions or want to place a custom order? We&apos;d love to hear from you
           </p>
         </div>
 
@@ -93,17 +93,10 @@ const Contact = () => {
 
               <button
                 type="submit"
-                disabled={submitted}
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg flex items-center justify-center space-x-2 transition-colors disabled:bg-green-600 disabled:cursor-not-allowed"
+                className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg flex items-center justify-center space-x-2 transition-colors"
               >
-                {submitted ? (
-                  <>Success! We'll be in touch soon</>
-                ) : (
-                  <>
-                    <span>Send Message</span>
-                    <Send className="h-5 w-5" />
-                  </>
-                )}
+                <span>Send Message</span>
+                <Send className="h-5 w-5" />
               </button>
             </form>
           </div>
